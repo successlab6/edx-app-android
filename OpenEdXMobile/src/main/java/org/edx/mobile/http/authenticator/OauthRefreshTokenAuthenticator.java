@@ -1,6 +1,7 @@
 package org.edx.mobile.http.authenticator;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -110,7 +111,7 @@ public class OauthRefreshTokenAuthenticator implements Authenticator {
                 .getInstance(RetrofitProvider.class).getNonOAuthBased().create(LoginService.class);
 
         AuthResponse refreshTokenData = executeStrict(loginService.refreshAccessToken(
-                "refresh_token", config.getOAuthClientId(), currentAuth.refresh_token));
+                "refresh_token", config.getOAuthClientId(), currentAuth.refresh_token, "jwt"));
         loginPrefs.storeRefreshTokenResponse(refreshTokenData);
         return refreshTokenData;
     }

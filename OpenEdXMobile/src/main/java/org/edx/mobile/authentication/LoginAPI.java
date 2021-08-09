@@ -1,6 +1,7 @@
 package org.edx.mobile.authentication;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
@@ -77,10 +78,11 @@ public class LoginAPI {
 
     @NonNull
     public Response<AuthResponse> getAccessToken(@NonNull String username,
-                                       @NonNull String password) throws IOException {
+                                                 @NonNull String password) throws IOException {
         String grantType = "password";
+        String tokenType = "jwt";
         String clientID = config.getOAuthClientId();
-        return loginService.getAccessToken(grantType, clientID, username, password).execute();
+        return loginService.getAccessToken(grantType, clientID, username, password, tokenType).execute();
     }
 
     @NonNull
@@ -111,7 +113,7 @@ public class LoginAPI {
     @NonNull
     private AuthResponse finishSocialLogIn(@NonNull String accessToken, @NonNull LoginPrefs.AuthBackend authBackend) throws Exception {
         final String backend = ApiConstants.getOAuthGroupIdForAuthBackend(authBackend);
-        final Response<AuthResponse> response = loginService.exchangeAccessToken(accessToken, config.getOAuthClientId(), backend).execute();
+        final Response<AuthResponse> response = loginService.exchangeAccessToken(accessToken, config.getOAuthClientId(), backend, "jwt").execute();
         if (response.code() == HttpURLConnection.HTTP_UNAUTHORIZED || response.code() == HTTP_BAD_REQUEST) {
             // TODO: Introduce a more explicit error code to indicate that an account is not linked.
             throw new AccountNotLinkedException(response.code());
@@ -240,7 +242,9 @@ public class LoginAPI {
     }
 
     public static class AccountNotLinkedException extends Exception {
-        /** HTTP status code. */
+        /**
+         * HTTP status code.
+         */
         private int responseCode;
 
         public AccountNotLinkedException(int responseCode) {
