@@ -33,5 +33,7 @@
     <string name="message_an_error_occurred">An error occurred while loading your course</string>
     <!-- Message for access expire and can upgrade -->
     <string name="message_to_upgrade_course">Upgrade to get full access to this course and pursue a certificate.</string>
+    <!-- Message for course hasn’t started yet -->
+    <string name="message_course_not_started">Come back %s to see all your course content here.</string>
 
 </resources>

@@ -25,7 +25,7 @@ class EdxCourseAccessErrorState @JvmOverloads constructor(
         }
     }
 
-    fun setState(state: State) {
+    fun setState(state: State, date: String? = null) {
         when (state) {
             State.AUDIT_ACCESS_EXPIRED -> {
                 layout.heading.text = context.getString(R.string.course_access_expired)
@@ -46,6 +46,17 @@ class EdxCourseAccessErrorState @JvmOverloads constructor(
                 }, 250)
                 layout.secondaryButton.setVisibility(true)
                 layout.secondaryButton.text = context.getText(R.string.label_find_a_course)
+            }
+            State.NOT_STARTED -> {
+                layout.heading.text = context.getString(R.string.course_not_started)
+                layout.description.text =
+                    context.getString(R.string.message_course_not_started, date)
+                layout.layoutUpgradeFeatures.root.setVisibility(false)
+                layout.primaryButton.shimmerViewContainer.hideShimmer()
+                layout.primaryButton.btnUpgrade.icon = null
+                layout.secondaryButton.setVisibility(false)
+                layout.primaryButton.btnUpgrade.text =
+                    context.getText(R.string.find_course_btn_text)
             }
         }
     }
@@ -74,6 +85,6 @@ class EdxCourseAccessErrorState @JvmOverloads constructor(
     }
 
     enum class State {
-        NONE, AUDIT_ACCESS_EXPIRED, IS_UPGRADEABLE
+        NONE, AUDIT_ACCESS_EXPIRED, IS_UPGRADEABLE, NOT_STARTED,
     }
 }
