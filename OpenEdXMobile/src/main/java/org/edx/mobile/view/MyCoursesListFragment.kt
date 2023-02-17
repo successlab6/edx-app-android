@@ -25,7 +25,6 @@ import org.edx.mobile.exception.ErrorMessage
 import org.edx.mobile.extenstion.setVisibility
 import org.edx.mobile.http.HttpStatus
 import org.edx.mobile.http.HttpStatusException
-import org.edx.mobile.view.custom.error.EdxErrorState
 import org.edx.mobile.http.notifications.FullScreenErrorNotification
 import org.edx.mobile.http.notifications.SnackbarErrorNotification
 import org.edx.mobile.interfaces.RefreshListener
@@ -39,6 +38,7 @@ import org.edx.mobile.util.NonNullObserver
 import org.edx.mobile.util.UiUtils
 import org.edx.mobile.util.observer.EventObserver
 import org.edx.mobile.view.adapters.MyCoursesAdapter
+import org.edx.mobile.view.custom.error.EdxErrorState
 import org.edx.mobile.view.dialog.CourseModalDialogFragment
 import org.edx.mobile.view.dialog.FullscreenLoaderDialogFragment
 import org.edx.mobile.viewModel.CourseViewModel
