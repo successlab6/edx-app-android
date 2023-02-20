@@ -10,7 +10,7 @@ on:
 
     branches:
 
-      - master
+      - rc/3.2.9
 
 # Multiple jobs run in parallel
 
